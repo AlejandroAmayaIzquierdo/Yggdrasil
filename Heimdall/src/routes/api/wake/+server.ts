@@ -1,5 +1,6 @@
 import { json, type RequestHandler } from '@sveltejs/kit';
 import wol from 'wake_on_lan';
+import * as logs from '$lib/server/logs';
 
 export const POST: RequestHandler = async ({ locals }) => {
 	if (!locals.user) {
@@ -8,6 +9,13 @@ export const POST: RequestHandler = async ({ locals }) => {
 	console.log('Wake API called');
 
 	wol.wake('a8:b8:e0:04:0e:b5');
+
+	await logs.generateLog({
+		action: 'WAKE_REQUEST',
+		details: 'Wake-on-LAN packet sent',
+		timestamp: new Date(),
+		userId: locals.user.id
+	});
 
 	return json({ success: true });
 };

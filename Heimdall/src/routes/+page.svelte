@@ -7,6 +7,8 @@
 	import { onMount } from 'svelte';
 	import Uptime from '$lib/components/Uptime.svelte';
 	import UsagePercentage from '$lib/components/UsagePercentage.svelte';
+	import type { LogEntry } from '$lib/server/logs';
+	import ActivityLog from '$lib/components/Logs/ActivityLog.svelte';
 
 	let { data }: { data: PageServerData } = $props();
 
@@ -15,7 +17,9 @@
 	let cpuUsage: number = $state(0);
 	let memoryUsage: number = $state(0);
 
-	const {} = data;
+	let logs: LogEntry[] = $state([]);
+
+	const { } = data;
 
 	const handleWake = async () => {
 		try {
@@ -31,6 +35,7 @@
 			} else {
 				toast.error(`Failed to send wake request: ${result.message}`);
 			}
+
 		} catch (error) {
 			console.error('Error sending wake request:', error);
 			alert('An error occurred while sending the wake request.');
@@ -59,9 +64,26 @@
 		}
 	};
 
+	const fetchPastLogs = async () => {
+		try {
+			const response = await fetch('/api/logs');
+			const result = await response.json();
+
+			if (response.ok) {
+				console.log('Past Logs:', result);
+				logs = result as LogEntry[];
+			} else {
+				console.error('Failed to fetch past logs:', result.message);
+			}
+		} catch (error) {
+			console.error('Error fetching past logs:', error);
+		}
+	};
+
 	if (browser) {
 		onMount(() => {
 			setTimeout(fetchServerStatus, 1000);
+			fetchPastLogs();
 		});
 	}
 </script>
@@ -80,4 +102,6 @@
             <Activity class="h-4 w-4 text-muted-foreground" />
         </UsagePercentage>
 	</div>
+
+	<ActivityLog {logs} />
 </div>

@@ -20,11 +20,11 @@ export const actions: Actions = {
 
 		if (!validateUsername(username)) {
 			return fail(400, {
-				message: 'Invalid username (min 3, max 31 characters, alphanumeric only)'
+				message: 'Invalid username'
 			});
 		}
 		if (!validatePassword(password)) {
-			return fail(400, { message: 'Invalid password (min 6, max 255 characters)' });
+			return fail(400, { message: 'Error validating password' });
 		}
 
 		const results = await db.select().from(table.user).where(eq(table.user.username, username));
@@ -53,14 +53,9 @@ export const actions: Actions = {
 };
 
 function validateUsername(username: unknown): username is string {
-	return (
-		typeof username === 'string' &&
-		username.length >= 3 &&
-		username.length <= 31 &&
-		/^[a-z0-9_-]+$/.test(username)
-	);
+	return typeof username === 'string' && /^[a-z0-9_-]+$/.test(username);
 }
 
 function validatePassword(password: unknown): password is string {
-	return typeof password === 'string' && password.length >= 6 && password.length <= 255;
+	return typeof password === 'string';
 }
