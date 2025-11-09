@@ -1,0 +1,86 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+	:root {
+		/* Dark Tech Aesthetic - Azul frío + rojo elegante */
+		--background: 220 10% 10%;
+		--foreground: 0 0% 95%;
+		--card: 220 8% 15%;
+		--card-foreground: 0 0% 95%;
+		--popover: 220 8% 10%;
+		--popover-foreground: 0 0% 95%;
+		--primary: 210 70% 55%; /* Azul frío */
+		--primary-foreground: 0 0% 98%;
+		--secondary: 220 8% 25%;
+		--secondary-foreground: 0 0% 95%;
+		--muted: 220 5% 30%;
+		--muted-foreground: 0 0% 65%;
+		--accent: 200 50% 60%; /* Azul verdoso tenue */
+		--accent-foreground: 0 0% 98%;
+		--destructive: 0 70% 50%; /* Rojo elegante */
+		--destructive-foreground: 0 0% 98%;
+		--border: 220 8% 25%;
+		--input: 220 8% 20%;
+		--ring: 210 70% 55%;
+		--chart-1: 210 70% 55%;
+		--chart-2: 180 60% 50%;
+		--chart-3: 0 70% 50%;
+		--chart-4: 120 45% 45%;
+		--chart-5: 45 60% 55%;
+		--radius: 0.625rem;
+	}
+
+	.dark {
+		/* Igual paleta para consistencia dark */
+		--background: 220 10% 10%;
+		--foreground: 0 0% 95%;
+		--card: 220 8% 15%;
+		--card-foreground: 0 0% 95%;
+		--popover: 220 8% 10%;
+		--popover-foreground: 0 0% 95%;
+		--primary: 210 70% 55%;
+		--primary-foreground: 0 0% 98%;
+		--secondary: 220 8% 25%;
+		--secondary-foreground: 0 0% 95%;
+		--muted: 220 5% 30%;
+		--muted-foreground: 0 0% 65%;
+		--accent: 200 50% 60%;
+		--accent-foreground: 0 0% 98%;
+		--destructive: 0 70% 50%;
+		--destructive-foreground: 0 0% 98%;
+		--border: 220 8% 25%;
+		--input: 220 8% 20%;
+		--ring: 210 70% 55%;
+		--chart-1: 210 70% 55%;
+		--chart-2: 180 60% 50%;
+		--chart-3: 0 70% 50%;
+		--chart-4: 120 45% 45%;
+		--chart-5: 45 60% 55%;
+	}
+
+	* {
+		border-color: hsl(var(--border));
+	}
+
+	body {
+		background-color: hsl(var(--background));
+		color: hsl(var(--foreground));
+	}
+}
+
+::-webkit-scrollbar {
+	width: 5px;
+}
+
+::-webkit-scrollbar-track {
+	background: hsl(var(--border));
+	border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+	background: hsl(var(--primary));
+	border-radius: 5px;
+}
+
